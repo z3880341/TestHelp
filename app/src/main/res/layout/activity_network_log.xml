@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="网络日志"
+        android:textColor="#181818"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@null"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/startDate"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="开始日期"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/startTime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="开始时间"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/endDate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/startDate"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/endDate"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="结束日期"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/endTime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/startTime"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/endTime"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="结束时间"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/timeInquiry"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/endDate"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/timeInquiry"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="时间查询"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/endTime"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <EditText
+        android:id="@+id/keyword"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:hint="请输入要查询的关键字"
+        app:layout_constraintEnd_toStartOf="@+id/keywordInquiry"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startTime" />
+
+    <TextView
+        android:id="@+id/keywordInquiry"
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="关键查询"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/keyword"
+        app:layout_constraintTop_toBottomOf="@id/startTime" />
+
+    <TextView
+        android:id="@+id/getTheLatest"
+        android:text="获取最新100条数据"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:background="#B8F7FF"
+        app:layout_constraintTop_toBottomOf="@id/keyword"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/errorList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/getTheLatest" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
