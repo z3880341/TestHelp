@@ -25,7 +25,7 @@ public class TestHelp {
         ErrorCollect.getInstance().init(context);
     }
 
-    public void insertBlog(Context context, String content) {
+    public void insertLog(Context context, String content) {
         if (TextUtils.isEmpty(content.trim())){
             return;
         }

@@ -3,7 +3,7 @@ package com.wt.ytzn.testhelp.util;
 /**
  *@content:按键延时工具类,用于防止按键连点
  *@time:2019-5-19
- *@build:zhouqiang
+ *@build:
  */
 
 public class ButtonDelayUtil {

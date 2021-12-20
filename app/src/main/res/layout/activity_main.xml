@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="网络日志"
+        android:text="Log日志"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:background="@android:color/holo_green_light"

@@ -22,7 +22,6 @@ public class DataProvider extends ContentProvider {
     private static final String NETWORK_PATH = "network";
     private static final int ERROR_CODE = 0;
     private static final int NETWORK_CODE = 1;
-    private static final String DATA = "data";
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {

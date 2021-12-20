@@ -16,7 +16,6 @@ import com.wt.ytzn.testhelp.ui.net.NetworkLogActivity;
 import com.wt.ytzn.testhelp.util.ButtonDelayUtil;
 
 public class MainActivity extends AppCompatActivity {
-    private final String TAG = "ytzn 临时调试 MainActivity";
     private ActivityMainBinding mBinding;
 
     @Override
