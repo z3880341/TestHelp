@@ -3,6 +3,7 @@ package com.wt.ytzn.testhelplib;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -21,19 +22,25 @@ public class ErrorCollect implements Thread.UncaughtExceptionHandler {
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
-
     @Override
     public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
         e.printStackTrace();
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(e.toString() + "\n");
-        for (StackTraceElement item : e.getStackTrace()) {
-            jsonArray.put(item.toString() + "\n");
+        try {
+            if (TestHelp.getInstance().isEnable()) {
+                JSONArray jsonArray = new JSONArray();
+                jsonArray.put(e.toString() + "\n");
+                for (StackTraceElement item : e.getStackTrace()) {
+                    jsonArray.put(item.toString() + "\n");
+                }
+                Uri uri = Uri.parse(UriConfig.ERROR_URI);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("content", jsonArray.toString());
+                context.getContentResolver().insert(uri, contentValues);
+            }
+        } catch (Exception e1) {
+            e.printStackTrace();
+            Log.e("ErrorCollect", "插入异常log失败, 异常原因:" + e1.getMessage());
         }
-        Uri uri = Uri.parse(UriConfig.ERROR_URI);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("content", jsonArray.toString());
-        context.getContentResolver().insert(uri, contentValues);
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

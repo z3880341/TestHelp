@@ -10,7 +10,7 @@
         android:layout_height="44dp"
         android:background="@android:color/white"
         android:gravity="center"
-        android:text="网络日志"
+        android:text="日志"
         android:textColor="#181818"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"

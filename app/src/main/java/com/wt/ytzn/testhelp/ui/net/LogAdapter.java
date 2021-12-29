@@ -2,7 +2,7 @@ package com.wt.ytzn.testhelp.ui.net;
 
 
 import android.annotation.SuppressLint;
-import android.text.TextUtils;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class NetworkLogAdapter extends RecyclerView.Adapter<NetworkLogAdapter.ViewHolder> {
+public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
     private List<NetworkBean> mList = new ArrayList<>();
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+    private int mCurrentClickPosition = -1;
 
     @SuppressLint("NotifyDataSetChanged")
     public void refreshData(List<NetworkBean> list) {
@@ -33,9 +34,21 @@ public class NetworkLogAdapter extends RecyclerView.Adapter<NetworkLogAdapter.Vi
 
     @NonNull
     @Override
-    public NetworkLogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemNetworkLogBinding binding = ItemNetworkLogBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         ViewHolder viewHolder = new ViewHolder(binding);
+        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = viewHolder.getAdapterPosition();
+                if (position == RecyclerView.NO_POSITION) {
+                    return;
+                }
+                mCurrentClickPosition = position;
+                notifyItemChanged(position);
+
+            }
+        });
         return viewHolder;
     }
 
@@ -45,10 +58,13 @@ public class NetworkLogAdapter extends RecyclerView.Adapter<NetworkLogAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NetworkLogAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LogAdapter.ViewHolder holder, int position) {
         NetworkBean errorBean = mList.get(position);
+        Context context = holder.binding.content.getContext();
         holder.binding.content.setText(mDateFormat.format(errorBean.creationTime) + ":" + errorBean.content);
-
+        if (mCurrentClickPosition == position) {
+            holder.binding.content.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

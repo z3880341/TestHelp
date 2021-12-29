@@ -16,7 +16,6 @@ import com.wt.ytzn.testhelp.database.NetworkBean;
 import com.wt.ytzn.testhelp.database.NetworkDBOperate;
 
 public class DataProvider extends ContentProvider {
-    private final static String TAG = "ytzn 临时调试 DataProvider";
     private static final String BASE_URL = "com.wt.ytzn.testhelp.provider";
     private static final String ERROR_PATH = "error";
     private static final String NETWORK_PATH = "network";
@@ -31,7 +30,6 @@ public class DataProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        Log.v(TAG, "DataProvider onCreate");
         return true;
     }
 
@@ -50,7 +48,6 @@ public class DataProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        Log.e(TAG, "insert: uri = " + uri.toString());
         switch (uriMatcher.match(uri)){
             case ERROR_CODE:
                 ErrorBean errorBean = new ErrorBean();
@@ -59,7 +56,6 @@ public class DataProvider extends ContentProvider {
                 ErrorDBOperate.getInstance().insert(errorBean);
                 break;
             case NETWORK_CODE:
-                Log.e(TAG, "insert: NETWORK_CODE");
                 NetworkBean networkBean = new NetworkBean();
                 networkBean.content = values.getAsString("content");
                 networkBean.creationTime = System.currentTimeMillis();

@@ -13,16 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.wt.ytzn.testhelp.database.NetworkBean;
 import com.wt.ytzn.testhelp.database.NetworkDBOperate;
-import com.wt.ytzn.testhelp.databinding.ActivityNetworkLogBinding;
-
+import com.wt.ytzn.testhelp.databinding.ActivityLogBinding;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class NetworkLogActivity extends AppCompatActivity {
-    private ActivityNetworkLogBinding mBinding;
-    private NetworkLogAdapter mAdapter;
+public class LogActivity extends AppCompatActivity {
+    private ActivityLogBinding mBinding;
+    private LogAdapter mAdapter;
     private Calendar mStartCalender = Calendar.getInstance();
     private Calendar mEndCalender = Calendar.getInstance();
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -31,11 +30,11 @@ public class NetworkLogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = ActivityNetworkLogBinding.inflate(getLayoutInflater());
+        mBinding = ActivityLogBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
         mBinding.back.setOnClickListener(v -> finish());
         mBinding.errorList.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new NetworkLogAdapter();
+        mAdapter = new LogAdapter();
         mBinding.errorList.setAdapter(mAdapter);
         mBinding.startDate.setText(mDateFormat.format(mStartCalender.getTimeInMillis()));
         mBinding.endDate.setText(mDateFormat.format(mEndCalender.getTimeInMillis()));
@@ -53,11 +52,11 @@ public class NetworkLogActivity extends AppCompatActivity {
         });
         mBinding.timeInquiry.setOnClickListener(v -> {
             if (TextUtils.equals(mBinding.startTime.getText(),"开始时间")){
-                Toast.makeText(NetworkLogActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (TextUtils.equals(mBinding.endTime.getText(),"结束时间")){
-                Toast.makeText(NetworkLogActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 return;
             }
             NetworkDBOperate.getInstance().searchByTime(mStartCalender.getTimeInMillis(), mEndCalender.getTimeInMillis(), new NetworkDBOperate.Callback() {
@@ -70,7 +69,7 @@ public class NetworkLogActivity extends AppCompatActivity {
         mBinding.keywordInquiry.setOnClickListener(v -> {
             String content = mBinding.keyword.getText().toString();
             if (TextUtils.isEmpty(content.trim())){
-                Toast.makeText(NetworkLogActivity.this, "你没有输入内容", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogActivity.this, "你没有输入内容", Toast.LENGTH_SHORT).show();
                 return;
             }
             NetworkDBOperate.getInstance().searchByContain(content, new NetworkDBOperate.Callback() {

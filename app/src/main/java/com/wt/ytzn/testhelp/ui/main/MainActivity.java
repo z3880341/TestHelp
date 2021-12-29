@@ -12,7 +12,7 @@ import com.wt.ytzn.testhelp.database.ErrorDBOperate;
 import com.wt.ytzn.testhelp.database.NetworkDBOperate;
 import com.wt.ytzn.testhelp.databinding.ActivityMainBinding;
 import com.wt.ytzn.testhelp.ui.error.ErrorLogActivity;
-import com.wt.ytzn.testhelp.ui.net.NetworkLogActivity;
+import com.wt.ytzn.testhelp.ui.net.LogActivity;
 import com.wt.ytzn.testhelp.util.ButtonDelayUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         });
         mBinding.network.setOnClickListener(v -> {
             if (ButtonDelayUtil.isFastClick()) {
-                Intent intent = new Intent(this, NetworkLogActivity.class);
+                Intent intent = new Intent(this, LogActivity.class);
                 startActivity(intent);
             }
 
