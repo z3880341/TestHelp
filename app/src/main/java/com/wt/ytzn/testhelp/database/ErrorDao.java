@@ -21,7 +21,7 @@ public abstract class ErrorDao {
     @Delete
     public abstract void delete(ErrorBean... data);
 
-    @Query("select * from ErrorBean")
+    @Query("select * from ErrorBean order by id DESC")
     abstract List<ErrorBean> getAll();
 
     /**

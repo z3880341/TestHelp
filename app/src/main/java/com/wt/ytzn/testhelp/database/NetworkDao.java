@@ -18,16 +18,28 @@ public abstract class NetworkDao {
     @Update
     public abstract void update(NetworkBean... data);
 
-    @Delete
-    public abstract void delete(NetworkBean... data);
-
-    @Query("select * from NetworkBean order by id DESC limit 100")
+    /**
+     * 查询最新100条数据
+     * @return
+     */
+    @Query("select * from NetworkBean order by id DESC limit 200")
     abstract List<NetworkBean> theLatestData();
 
-    @Query("select * from NetworkBean where creationTime between :startTime and :endTime")
+    /**
+     * 查询指定时间段
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Query("select * from NetworkBean where creationTime between :startTime and :endTime order by id DESC")
     abstract List<NetworkBean> searchByTime(long startTime, long endTime);
 
-    @Query("select * from NetworkBean where content like '%'||:content||'%'")
+    /**
+     * 模糊查询并且倒叙
+     * @param content
+     * @return
+     */
+    @Query("select * from NetworkBean where content like '%'||:content||'%' order by id DESC")
     abstract List<NetworkBean> searchByContain(String content);
 
     /**
