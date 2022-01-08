@@ -9,41 +9,25 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-
 public class TestHelp {
-    private static TestHelp sTestHelp;
-    private boolean mEnable = false;
+    private Context mContext;
+    private boolean mEnableLogCollect = false;
     private Handler mMainHandler = new Handler(Looper.getMainLooper());
 
-    public static TestHelp getInstance() {
-        if (sTestHelp == null) {
-            synchronized (TestHelp.class) {
-                if (sTestHelp == null) {
-                    sTestHelp = new TestHelp();
-                }
-            }
+    private TestHelp(Build build){
+        mContext = build.context;
+        initErrorCollect(build.mEnableErrorCollect);
+        mEnableLogCollect = build.mEnableLogCollect;
+    }
+
+    private void initErrorCollect(boolean isEnable) {
+        if (isEnable) {
+            ErrorCollect.getInstance().init(mContext, isEnable);
         }
-        return sTestHelp;
     }
 
-    public void setEnable(boolean mEnable) {
-        this.mEnable = mEnable;
-    }
-
-    protected boolean isEnable() {
-        return mEnable;
-    }
-
-    public void initErrorCollect(Context context) {
-        if (!mEnable){
-            return;
-        }
-        ErrorCollect.getInstance().init(context);
-    }
-
-    public void insertLog(Context context, String content) {
-        if (!mEnable){
+    public void insertLog(String content) {
+        if (!mEnableLogCollect){
             return;
         }
         if (TextUtils.isEmpty(content.trim())){
@@ -53,12 +37,35 @@ public class TestHelp {
             Uri uri = Uri.parse(UriConfig.NETWORK_URI);
             ContentValues contentValues = new ContentValues();
             contentValues.put("content", content);
-            context.getContentResolver().insert(uri, contentValues);
+            mContext.getContentResolver().insert(uri, contentValues);
         } catch (Exception e){
             e.printStackTrace();
-            mMainHandler.post(()-> Toast.makeText(context, "log插入失败,你可能没安装或者启动TestHelp", Toast.LENGTH_SHORT).show());
+            mMainHandler.post(()-> Toast.makeText(mContext, "log插入失败,你可能没安装或者启动TestHelp", Toast.LENGTH_SHORT).show());
             Log.e("TestHelp", "插入log失败, 异常原因:" + e.getMessage());
         }
     }
 
+    public static class Build{
+        private Context context;
+        private boolean mEnableErrorCollect = false;
+        private boolean mEnableLogCollect = false;
+
+        public Build(Context context){
+            this.context = context;
+        }
+
+        public Build enableErrorCollect(boolean isEnable){
+            mEnableErrorCollect = isEnable;
+            return this;
+        }
+
+        public Build enableLogCollect(boolean isEnable){
+            mEnableLogCollect = isEnable;
+            return this;
+        }
+
+        public TestHelp build(){
+            return new TestHelp(this);
+        }
+    }
 }
