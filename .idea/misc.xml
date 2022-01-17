@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/github/testhelp/app/src/main/res/layout/activity_log.xml" value="0.2210144927536232" />
+        <entry key="..\:/github/testhelp/app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
+        <entry key="..\:/github/testhelp/app/src/main/res/layout/activity_network_log.xml" value="0.17806484295845998" />
         <entry key="..\:/work2/helpApp/app/src/main/res/layout/activity_error_log.xml" value="0.26856884057971014" />
         <entry key="..\:/work2/helpApp/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
         <entry key="..\:/work2/helpApp/app/src/main/res/layout/activity_network_log.xml" value="0.26856884057971014" />

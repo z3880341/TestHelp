@@ -112,7 +112,7 @@
 
     <TextView
         android:id="@+id/getTheLatest"
-        android:text="获取最新100条数据"
+        android:text="获取最新200条数据"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:gravity="center"
